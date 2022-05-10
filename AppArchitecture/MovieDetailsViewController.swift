@@ -9,11 +9,11 @@ import UIKit
 
 class MovieDetailsViewController: UIViewController {
 
+    let viewModel = MovieDetailsViewModel()
+
     @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
-
-    var movie: Movie!
 
     var cast: [MovieCastMember] = [] {
         didSet {
@@ -24,43 +24,31 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = movie.title
-        overviewLabel.text = movie.overview
-
-        getPoster(for: movie) { [weak self] result in
-            switch result {
-            case .success(let poster):
-                DispatchQueue.main.async {
-                    self?.posterImageView.image = poster
-                }
-            case .failure:
-                break
-            }
-        }
+        navigationItem.title = viewModel.movie.title
+        overviewLabel.text = viewModel.movie.overview
 
         tableView.dataSource = self
 
-        getCredits(for: movie) { [weak self] result in
-            switch result {
-            case .success(let creditsResponse):
-                DispatchQueue.main.async {
-                    self?.cast = creditsResponse.cast
-                }
-            case .failure:
-                break
-            }
+        viewModel.poster.onUpdate = { [weak self] poster in
+            self?.posterImageView.image = poster
         }
+
+        viewModel.cast.onUpdate = { [weak self] _ in
+            self?.tableView.reloadData()
+        }
+
+        viewModel.fetchData()
     }
 }
 
 extension MovieDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cast.count
+        return viewModel.cast.value.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCast", for: indexPath)
-        let castMember = cast[indexPath.row]
+        let castMember = viewModel.cast.value[indexPath.row]
 
         var content = cell.defaultContentConfiguration()
         content.text = castMember.name

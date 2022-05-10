@@ -9,12 +9,8 @@ import UIKit
 
 class MoviesViewController: UIViewController {
 
-    var movies: [Movie] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    
+    let viewModel = MoviesViewModel()
+
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -23,27 +19,22 @@ class MoviesViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
 
-        getMovies { [weak self] result in
-            switch result {
-            case .success(let movieResponse):
-                DispatchQueue.main.async {
-                    self?.movies = movieResponse.results
-                }
-            case .failure:
-                break
-            }
+        viewModel.movies.onUpdate = { [weak self] _ in
+            self?.tableView.reloadData()
         }
+
+        viewModel.fetchData()
     }
 }
 
 extension MoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        return viewModel.movies.value.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-        let movie = movies[indexPath.row]
+        let movie = viewModel.movies.value[indexPath.row]
 
         var content = cell.defaultContentConfiguration()
         content.text = movie.title
@@ -59,10 +50,10 @@ extension MoviesViewController: UITableViewDataSource {
 
 extension MoviesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let movie = movies[indexPath.row]
+        let movie = viewModel.movies.value[indexPath.row]
 
         let detailsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MovieDetails") as! MovieDetailsViewController
-        detailsVC.movie = movie
+        detailsVC.viewModel.movie = movie
         navigationController?.pushViewController(detailsVC, animated: true)
 
         tableView.deselectRow(at: indexPath, animated: true)

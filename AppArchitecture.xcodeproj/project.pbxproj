@@ -19,6 +19,9 @@
 		BF7E7434282AFCA400DD6425 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E7433282AFCA400DD6425 /* Variable.swift */; };
 		BF7E7436282AFCB800DD6425 /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E7435282AFCB800DD6425 /* MoviesViewModel.swift */; };
 		BF7E743A282AFE5900DD6425 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E7439282AFE5900DD6425 /* MovieDetailsViewModel.swift */; };
+		BF7E743C282B010700DD6425 /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E743B282B010700DD6425 /* MoviesService.swift */; };
+		BF7E743E282B01AA00DD6425 /* MovieDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E743D282B01AA00DD6425 /* MovieDetailsService.swift */; };
+		BF7E7440282B027700DD6425 /* ViewControllerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E743F282B027700DD6425 /* ViewControllerProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		BF7E7433282AFCA400DD6425 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		BF7E7435282AFCB800DD6425 /* MoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewModel.swift; sourceTree = "<group>"; };
 		BF7E7439282AFE5900DD6425 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
+		BF7E743B282B010700DD6425 /* MoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesService.swift; sourceTree = "<group>"; };
+		BF7E743D282B01AA00DD6425 /* MovieDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsService.swift; sourceTree = "<group>"; };
+		BF7E743F282B027700DD6425 /* ViewControllerProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +77,7 @@
 				BF257A052829A2960030AC44 /* AppDelegate.swift */,
 				BF257A072829A2960030AC44 /* SceneDelegate.swift */,
 				BF257A192829A3200030AC44 /* Model.swift */,
+				BF7E743F282B027700DD6425 /* ViewControllerProvider.swift */,
 				BF7E7437282AFD7700DD6425 /* Movies */,
 				BF7E7438282AFE3E00DD6425 /* MovieDetails */,
 				BF7E7433282AFCA400DD6425 /* Variable.swift */,
@@ -87,6 +94,7 @@
 			children = (
 				BF257A1C2829A3200030AC44 /* MoviesViewController.swift */,
 				BF7E7435282AFCB800DD6425 /* MoviesViewModel.swift */,
+				BF7E743B282B010700DD6425 /* MoviesService.swift */,
 				BF257A1A2829A3200030AC44 /* MovieCell.swift */,
 			);
 			name = Movies;
@@ -97,6 +105,7 @@
 			children = (
 				BF257A1B2829A3200030AC44 /* MovieDetailsViewController.swift */,
 				BF7E7439282AFE5900DD6425 /* MovieDetailsViewModel.swift */,
+				BF7E743D282B01AA00DD6425 /* MovieDetailsService.swift */,
 			);
 			name = MovieDetails;
 			sourceTree = "<group>";
@@ -172,13 +181,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF7E743E282B01AA00DD6425 /* MovieDetailsService.swift in Sources */,
 				BF257A062829A2960030AC44 /* AppDelegate.swift in Sources */,
 				BF7E7434282AFCA400DD6425 /* Variable.swift in Sources */,
 				BF257A1F2829A3200030AC44 /* MovieDetailsViewController.swift in Sources */,
 				BF257A082829A2960030AC44 /* SceneDelegate.swift in Sources */,
 				BF257A1E2829A3200030AC44 /* MovieCell.swift in Sources */,
 				BF257A202829A3200030AC44 /* MoviesViewController.swift in Sources */,
+				BF7E743C282B010700DD6425 /* MoviesService.swift in Sources */,
 				BF257A1D2829A3200030AC44 /* Model.swift in Sources */,
+				BF7E7440282B027700DD6425 /* ViewControllerProvider.swift in Sources */,
 				BF7E7436282AFCB800DD6425 /* MoviesViewModel.swift in Sources */,
 				BF7E743A282AFE5900DD6425 /* MovieDetailsViewModel.swift in Sources */,
 			);
@@ -332,7 +344,6 @@
 				INFOPLIST_FILE = AppArchitecture/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -360,7 +371,6 @@
 				INFOPLIST_FILE = AppArchitecture/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

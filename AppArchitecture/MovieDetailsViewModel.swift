@@ -10,18 +10,21 @@ import UIKit
 
 class MovieDetailsViewModel {
 
-    var movie: Movie!
+    let movie: Movie
 
     let poster: Variable<UIImage?> = Variable(nil)
     let cast: Variable<[MovieCastMember]> = Variable([])
     let error: Variable<Error?> = Variable(nil)
 
-    func fetchData() {
-        guard let movie = movie else {
-            return
-        }
+    private let service: MovieDetailsServicing
 
-        getPoster(for: movie) { [weak self] result in
+    init(movie: Movie, service: MovieDetailsServicing) {
+        self.movie = movie
+        self.service = service
+    }
+
+    func fetchData() {
+        service.getPoster(for: movie) { [weak self] result in
             switch result {
             case .success(let poster):
                 self?.poster.value = poster
@@ -30,7 +33,7 @@ class MovieDetailsViewModel {
             }
         }
 
-        getCredits(for: movie) { [weak self] result in
+        service.getCredits(for: movie) { [weak self] result in
             switch result {
             case .success(let creditsResponse):
                 self?.cast.value = creditsResponse.cast

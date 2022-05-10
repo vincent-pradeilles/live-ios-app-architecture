@@ -9,7 +9,7 @@ import UIKit
 
 class MoviesViewController: UIViewController {
 
-    let viewModel = MoviesViewModel()
+    var viewModel: MoviesViewModel!
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -52,8 +52,7 @@ extension MoviesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movie = viewModel.movies.value[indexPath.row]
 
-        let detailsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MovieDetails") as! MovieDetailsViewController
-        detailsVC.viewModel.movie = movie
+        let detailsVC = ViewControllerProvider.movieDetailsController(for: movie)
         navigationController?.pushViewController(detailsVC, animated: true)
 
         tableView.deselectRow(at: indexPath, animated: true)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieDetailsViewController: UIViewController, UITableViewDataSource {
+class MovieDetailsViewController: UIViewController {
 
     @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var posterImageView: UIImageView!
@@ -51,7 +51,9 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource {
             }
         }
     }
+}
 
+extension MovieDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cast.count
     }

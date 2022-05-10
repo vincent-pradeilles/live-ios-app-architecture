@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController {
 
     var movies: [Movie] = [] {
         didSet {
@@ -34,7 +34,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             }
         }
     }
+}
 
+extension MoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
@@ -53,7 +55,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
 
         return cell
     }
+}
 
+extension MoviesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movie = movies[indexPath.row]
 

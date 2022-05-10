@@ -27,25 +27,27 @@ class MovieDetailsViewController: UIViewController, UITableViewDataSource {
         navigationItem.title = movie.title
         overviewLabel.text = movie.overview
 
-        getPoster(for: movie) { [weak self] poster, _ in
-            guard let poster = poster else {
-                return
-            }
-
-            DispatchQueue.main.async {
-                self?.posterImageView.image = poster
+        getPoster(for: movie) { [weak self] result in
+            switch result {
+            case .success(let poster):
+                DispatchQueue.main.async {
+                    self?.posterImageView.image = poster
+                }
+            case .failure:
+                break
             }
         }
 
         tableView.dataSource = self
 
-        getCredits(for: movie) { [weak self] creditsResponse, _ in
-            guard let creditsResponse = creditsResponse else {
-                return
-            }
-
-            DispatchQueue.main.async {
-                self?.cast = creditsResponse.cast
+        getCredits(for: movie) { [weak self] result in
+            switch result {
+            case .success(let creditsResponse):
+                DispatchQueue.main.async {
+                    self?.cast = creditsResponse.cast
+                }
+            case .failure:
+                break
             }
         }
     }

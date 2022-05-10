@@ -32,30 +32,38 @@ let jsonDecoder: JSONDecoder = {
     return decoder
 }()
 
-func getMovies(_ completion: @escaping (MovieResponse?, Error?) -> Void) {
+func getMovies(_ completion: @escaping (Result<MovieResponse, Error>) -> Void) {
     let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?api_key=\(apiKey)")!
 
     URLSession.shared.dataTask(with: url) { data, _, error in
         guard error == nil else {
-            completion(nil, error)
+            completion(.failure(error!))
             return
         }
 
         let decoded = try! jsonDecoder.decode(MovieResponse.self, from: data!)
 
-        completion(decoded, nil)
+        completion(.success(decoded))
     }.resume()
 }
 
-func getPoster(for movie: Movie, _ completion: @escaping (UIImage?, Error?) -> Void) {
+enum ImageError: Error {
+    case couldNotDecode
+}
+
+func getPoster(for movie: Movie, _ completion: @escaping (Result<UIImage, Error>) -> Void) {
     URLSession.shared.dataTask(with: movie.posterURL) { data, _, error in
         guard error == nil else {
-            completion(nil, error)
+            completion(.failure(error!))
             return
         }
 
-        let decoded = UIImage(data: data!)
-        completion(decoded, nil)
+        guard let decoded = UIImage(data: data!) else {
+            completion(.failure(ImageError.couldNotDecode))
+            return
+        }
+
+        completion(.success(decoded))
     }.resume()
 }
 
@@ -71,17 +79,17 @@ struct MovieCreditsResponse: Decodable {
     let cast: [MovieCastMember]
 }
 
-func getCredits(for movie: Movie, _ completion: @escaping (MovieCreditsResponse?, Error?) -> Void) {
+func getCredits(for movie: Movie, _ completion: @escaping (Result<MovieCreditsResponse, Error>) -> Void) {
     let url = URL(string: "https://api.themoviedb.org/3/movie/\(movie.id)/credits?api_key=\(apiKey)")!
 
     URLSession.shared.dataTask(with: url) { data, _, error in
         guard error == nil else {
-            completion(nil, error)
+            completion(.failure(error!))
             return
         }
 
         let decoded = try! jsonDecoder.decode(MovieCreditsResponse.self, from: data!)
 
-        completion(decoded, nil)
+        completion(.success(decoded))
     }.resume()
 }

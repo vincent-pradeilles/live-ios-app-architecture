@@ -23,13 +23,14 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         tableView.delegate = self
 
-        getMovies { [weak self] movieResponse, _ in
-            guard let movieResponse = movieResponse else {
-                return
-            }
-
-            DispatchQueue.main.async {
-                self?.movies = movieResponse.results
+        getMovies { [weak self] result in
+            switch result {
+            case .success(let movieResponse):
+                DispatchQueue.main.async {
+                    self?.movies = movieResponse.results
+                }
+            case .failure:
+                break
             }
         }
     }

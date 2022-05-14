@@ -13,7 +13,7 @@ enum AppConfiguration {
     case mock
 }
 
-let appConfiguration: AppConfiguration = .mock
+let appConfiguration: AppConfiguration = .live
 
 enum ViewControllerProvider {
     static var moviesViewController: MoviesViewController {

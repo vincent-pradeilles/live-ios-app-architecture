@@ -9,6 +9,8 @@ import UIKit
 
 class MovieDetailsViewController: UIViewController {
 
+    weak var coordinator: MainCoordinator?
+
     var viewModel: MovieDetailsViewModel!
 
     @IBOutlet weak var overviewLabel: UILabel!

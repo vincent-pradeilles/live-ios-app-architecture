@@ -66,7 +66,12 @@ class MovieDetailsMockService: MovieDetailsServicing {
         completion(.success(poster))
     }
 
+    var getCreditsCallCount = 0
+    var getCreditsMovieArgument: Movie?
     func getCredits(for movie: Movie, _ completion: @escaping (Result<MovieCreditsResponse, Error>) -> Void) {
+        getCreditsCallCount += 1
+        getCreditsMovieArgument = movie
+        
         let response = MovieCreditsResponse(cast: [
             MovieCastMember(id: 4783, name: "Sam Neill", character: "Dr. Alan Grant"),
             MovieCastMember(id: 4784, name: "Laura Dern", character: "Dr. Ellie Sattler"),

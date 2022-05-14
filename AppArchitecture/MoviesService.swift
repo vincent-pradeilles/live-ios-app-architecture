@@ -43,7 +43,11 @@ class MoviesService: MoviesServicing {
 }
 
 class MoviesMockService: MoviesServicing {
+
+    var getMoviesCallCount = 0
     func getMovies(_ completion: @escaping (Result<MovieResponse, Error>) -> Void) {
+        getMoviesCallCount += 1
+        
         let response = MovieResponse(results: [
             Movie(id: 507086, title: "Jurassic World Dominion", overview: "Four years after Isla Nublar was destroyed, dinosaurs now live—and hunt—alongside humans all over the world. This fragile balance will reshape the future and determine, once and for all, whether human beings are to remain the apex predators on a planet they now share with history’s most fearsome creatures.", posterPath: "/w4c0GTpmEQ1CZQNHndTv2PPgf2p.jpg"),
             Movie(id: 799876, title: "The Outfit", overview: "Leonard is an English tailor who used to craft suits on London’s world-famous Savile Row. After a personal tragedy, he’s ended up in Chicago, operating a small tailor shop in a rough part of town where he makes beautiful clothes for the only people around who can afford them: a family of vicious gangsters.", posterPath: "/lZa5EB6PVJBT5mxhgZS5ftqdAm6.jpg"),

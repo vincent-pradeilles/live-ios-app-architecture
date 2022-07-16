@@ -2,14 +2,14 @@
 
 ## Content
 
-This repository contains the code sample I've used during May 19th & 26th's livestreams 👉 https://www.youtube.com/watch?v=jx26O72c_FQ
+This repository contains the code sample I've used during May 19th & 26th's livestreams 👉 https://www.youtube.com/watch?v=_HL-Jz6Stic
 
 The repo is organized in two branches:
 
 * [before](https://github.com/vincent-pradeilles/live-ios-app-architecture/tree/before) contains the code of a simple app, with no clear architecture in place
 * [after](https://github.com/vincent-pradeilles/live-ios-app-architecture/tree/after) contains the code of the same app, with a much better architecture
 
-[![](https://img.youtube.com/vi/jx26O72c_FQ/0.jpg)](https://www.youtube.com/watch?v=jx26O72c_FQ)
+[![](https://img.youtube.com/vi/_HL-Jz6Stic/0.jpg)](https://www.youtube.com/watch?v=_HL-Jz6Stic)
 
 ## Sponsor
 
